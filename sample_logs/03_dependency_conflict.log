@@ -1,0 +1,9 @@
+$ npm install
+npm WARN deprecated request@2.88.2: request has been deprecated
+npm ERR! code ERESOLVE
+npm ERR! ERESOLVE could not resolve
+npm ERR! While resolving: react-datepicker@4.8.0
+npm ERR! Found: react@18.3.1
+npm ERR! Could not resolve dependency: peer react@"^16.9.0 || ^17" from react-datepicker@4.8.0
+npm ERR! Fix the upstream dependency conflict, or retry with --legacy-peer-deps
+Error: Process completed with exit code 1.

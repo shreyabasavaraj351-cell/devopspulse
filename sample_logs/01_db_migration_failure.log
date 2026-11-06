@@ -1,0 +1,11 @@
+2026-11-04T09:12:01Z [INFO] Starting deployment checkout-service v2.4.1 to staging
+2026-11-04T09:12:03Z [INFO] Pulling image registry.example.com/checkout:2.4.1
+2026-11-04T09:12:21Z [INFO] Image pulled successfully
+2026-11-04T09:12:22Z [INFO] Running database migrations
+2026-11-04T09:12:22Z [INFO] DATABASE_URL=postgresql://deploy:Sup3rS3cret@db.staging.internal:5432/checkout
+2026-11-04T09:12:23Z [INFO] Applying migration 0042_add_order_status_index
+2026-11-04T09:12:53Z [WARN] Slow query detected: CREATE INDEX on orders (31204 ms)
+2026-11-04T09:12:54Z [ERROR] psycopg2.OperationalError: connection to server at "db.staging.internal" (10.0.4.17), port 5432 failed: timeout expired
+2026-11-04T09:12:54Z [ERROR] Migration 0042_add_order_status_index failed: could not acquire lock, database connection pool exhausted (max 10)
+2026-11-04T09:12:55Z [ERROR] Migration step failed with exit code 1
+2026-11-04T09:12:55Z [FATAL] Deployment aborted. Rolling back to checkout-service v2.4.0

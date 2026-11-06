@@ -1,0 +1,7 @@
+2026-11-06T14:40:10Z [INFO] Deploying payments-api build #1873 to staging
+2026-11-06T14:40:12Z [INFO] Build artifact verified
+2026-11-06T14:40:13Z [INFO] Running schema migration 0107_add_ledger_index
+2026-11-06T14:40:14Z [WARN] Long running statement on ledger_entries, waiting for lock
+2026-11-06T14:40:44Z [ERROR] sqlalchemy.exc.TimeoutError: QueuePool limit of size 10 overflow 0 reached, connection timed out, timeout 30.00
+2026-11-06T14:40:44Z [ERROR] Migration 0107_add_ledger_index failed: database connection pool exhausted while holding lock
+2026-11-06T14:40:45Z [FATAL] Release failed, exit status 1
