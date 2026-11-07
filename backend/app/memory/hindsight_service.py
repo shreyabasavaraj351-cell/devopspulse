@@ -17,6 +17,12 @@ class MemoryUnavailable(Exception):
     pass
 
 
+def _error_label(exc: Exception) -> str:
+    """Log only safe provider diagnostics; never log response bodies or credentials."""
+    status = getattr(getattr(exc, "response", None), "status_code", None)
+    return f"{type(exc).__name__} (HTTP {status})" if status else type(exc).__name__
+
+
 def bank_id(org_id: int, project_id: int) -> str:
     return f"pm-org{org_id}-proj{project_id}"
 
@@ -51,7 +57,7 @@ class MemoryService:
         except MemoryUnavailable:
             raise
         except Exception as exc:
-            log.warning("Hindsight retain failed: %s", type(exc).__name__)
+            log.warning("Hindsight retain failed: %s", _error_label(exc))
             raise MemoryUnavailable("retain failed") from exc
 
     def recall(self, bank: str, query: str, max_results: int = 5) -> list[dict]:
@@ -64,7 +70,7 @@ class MemoryService:
         except MemoryUnavailable:
             raise
         except Exception as exc:
-            log.warning("Hindsight recall failed: %s", type(exc).__name__)
+            log.warning("Hindsight recall failed: %s", _error_label(exc))
             raise MemoryUnavailable("recall failed") from exc
         results = _get(resp, "results", resp) or []
         out = []
@@ -79,7 +85,7 @@ class MemoryService:
         except MemoryUnavailable:
             raise
         except Exception as exc:
-            log.warning("Hindsight reflect failed: %s", type(exc).__name__)
+            log.warning("Hindsight reflect failed: %s", _error_label(exc))
             raise MemoryUnavailable("reflect failed") from exc
         text = _get(resp, "text") or (resp if isinstance(resp, str) else None)
         return str(text)[:3000] if text else None
